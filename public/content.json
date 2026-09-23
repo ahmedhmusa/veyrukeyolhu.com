@@ -18,6 +18,12 @@
     "lead": "Veyru Keyolhu is a small, locally run fishing charter in the Maldives.",
     "body": "Our crew grew up on these reefs, learning the currents, tides and fishing spots the way Maldivians have for generations. Today we share that with visitors — from first-timers trying a handline under the stars to experienced anglers chasing a Giant Trevally.\n\nEvery trip is private, so we can go at your pace and fish the way you want. All gear is included, safety equipment is on every boat, and sport species like GT are always released."
   },
+  "staying": {
+    "eyebrow": "Staying",
+    "title": "Rest between",
+    "titleEm": "trips.",
+    "lead": "A little more island time. Simple, comfortable places to stay between days on the water — ask us about current availability."
+  },
   "contact": {
     "eyebrow": "Contact",
     "title": "Let’s go",
@@ -132,6 +138,23 @@
         "photos/captain-catch.jpg"
       ],
       "note": ""
+    }
+  ],
+  "stays": [
+    {
+      "id": "beachfront-room",
+      "title": "Beachfront Room",
+      "tag": "Sample listing",
+      "cover": "photos/img_3833.jpg",
+      "short": "A place to slow down between fishing days — ask us about available accommodation and confirmed facilities.",
+      "intro": "A simple, comfortable room a short walk from the jetty, ideal for guests joining an early-morning trip or staying a few extra nights. This is an example listing — message us for current availability and confirmed details.",
+      "amenities": "Air conditioning, Wi-Fi, private bathroom",
+      "guests": "Up to 2 guests",
+      "price": "Price on request",
+      "note": "Sample listing and illustrative photography. Room and facilities subject to confirmation.",
+      "photos": [
+        "photos/img_3833.jpg"
+      ]
     }
   ],
   "gallery": [

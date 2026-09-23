@@ -67,6 +67,26 @@ const PAGE_FIELDS = {
   },
 };
 
+const STAYING_PAGE_FIELDS = [
+  ["eyebrow", "Small label"],
+  ["title", "Headline — first line"],
+  ["titleEm", "Headline — second line (lighter colour)"],
+  ["lead", "Intro text", "textarea"],
+];
+
+const STAY_FIELDS = [
+  ["title", "Room / stay name"],
+  ["tag", "Badge", "text", "Short label on the card, e.g. “Beachfront”"],
+  ["short", "Card description", "textarea", "One sentence shown on the card."],
+  ["cover", "Main photo", "image"],
+  ["intro", "Full description", "textarea"],
+  ["amenities", "Amenities", "text", "", true],
+  ["guests", "Guests", "text", "e.g. Up to 2 guests", true],
+  ["price", "Price", "text", "e.g. From $80/night, or “Price on request”", true],
+  ["note", "Extra note (optional)", "text", "", true],
+  ["photos", "More photos (shown in the popup)", "images"],
+];
+
 const TOUR_FIELDS = [
   ["title", "Tour name"],
   ["tag", "Badge", "text", "Short label on the card, e.g. “Family friendly”"],
@@ -170,6 +190,30 @@ function render() {
     return;
   }
 
+  if (tab === "stays") {
+    const openIdx = [...panel.querySelectorAll(".tour-item[open]")].map(d => d.dataset.i);
+    content.stays ??= [];
+    panel.innerHTML = `
+      <div class="panel__head"><div><h2>Staying</h2><p>The page text below, and the rooms/stays listed on it.</p></div></div>
+      <section class="card"><h3>Page text</h3>${fieldsHTML("staying", STAYING_PAGE_FIELDS)}</section>
+      <div class="panel__head"><div><h3>Rooms &amp; stays</h3><p>Tap one to edit it. Use the arrows to change the order on the site.</p></div>
+        <button class="btn btn--light btn--sm" id="addStay">+ Add stay</button></div>
+      ${content.stays.map((s, i) => `
+        <details class="tour-item" data-i="${i}" ${openIdx.includes(String(i)) ? "open" : ""}>
+          <summary>
+            ${s.cover ? `<img src="${esc(imgSrc(s.cover))}" alt="">` : `<img alt="">`}
+            <strong>${esc(s.title || "Untitled stay")}</strong>
+            <span class="tools">
+              <button class="icon-btn" title="Move up" data-move="stays" data-i="${i}" data-d="-1">↑</button>
+              <button class="icon-btn" title="Move down" data-move="stays" data-i="${i}" data-d="1">↓</button>
+              <button class="icon-btn icon-btn--danger" title="Delete stay" data-delete-stay="${i}">✕</button>
+            </span>
+          </summary>
+          <div class="tour-item__body">${fieldsHTML(`stays.${i}`, STAY_FIELDS)}</div>
+        </details>`).join("")}`;
+    return;
+  }
+
   if (tab === "gallery") {
     panel.innerHTML = `
       <div class="panel__head"><div><h2>Gallery</h2><p>Photos in the “Straight from the boat” section, in this order.</p></div></div>
@@ -254,6 +298,7 @@ $("#panel").addEventListener("input", e => {
   setPath(p, e.target.value);
   markDirty();
   if (/^tours\.\d+\.title$/.test(p)) e.target.closest(".tour-item").querySelector("summary strong").textContent = e.target.value || "Untitled tour";
+  if (/^stays\.\d+\.title$/.test(p)) e.target.closest(".tour-item").querySelector("summary strong").textContent = e.target.value || "Untitled stay";
 });
 
 $("#panel").addEventListener("change", e => {
@@ -267,6 +312,16 @@ $("#panel").addEventListener("click", e => {
 
   if (b.id === "addTour") {
     content.tours.push({ id: "tour-" + Date.now(), title: "New tour", tag: "", short: "", cover: "", photos: [] });
+    render();
+    const items = document.querySelectorAll(".tour-item");
+    items[items.length - 1].open = true;
+    items[items.length - 1].scrollIntoView({ behavior: "smooth" });
+    markDirty();
+    return;
+  }
+
+  if (b.id === "addStay") {
+    content.stays.push({ id: "stay-" + Date.now(), title: "New stay", tag: "", short: "", cover: "", photos: [] });
     render();
     const items = document.querySelectorAll(".tour-item");
     items[items.length - 1].open = true;
@@ -299,6 +354,16 @@ $("#panel").addEventListener("click", e => {
     const t = content.tours[+b.dataset.deleteTour];
     if (!confirm(`Delete “${t.title || "this tour"}”? It will disappear from the site after you save.`)) return;
     content.tours.splice(+b.dataset.deleteTour, 1);
+    markDirty();
+    render();
+    return;
+  }
+
+  if (b.dataset.deleteStay) {
+    e.preventDefault();
+    const s = content.stays[+b.dataset.deleteStay];
+    if (!confirm(`Delete “${s.title || "this stay"}”? It will disappear from the site after you save.`)) return;
+    content.stays.splice(+b.dataset.deleteStay, 1);
     markDirty();
     render();
   }
@@ -345,8 +410,9 @@ async function showEditor() {
     const r = await fetch("/api/content", { cache: "no-store" });
     content = await r.json();
     content.tours ??= [];
+    content.stays ??= [];
     content.gallery ??= [];
-    for (const k of ["home", "about", "contact"]) content[k] ??= {};
+    for (const k of ["home", "about", "staying", "contact"]) content[k] ??= {};
   }
   $("#loginView").hidden = true;
   $("#editorView").hidden = false;

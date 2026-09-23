@@ -94,6 +94,51 @@ function openTour(t, whatsapp) {
   modal.scrollTop = 0;
 }
 
+/* ---------- Staying ---------- */
+function renderStays(c) {
+  const grid = document.getElementById("staysGrid");
+  if (!grid) return;
+  const stays = c.stays || [];
+  if (!stays.length) { grid.innerHTML = `<p class="muted">Ask us on WhatsApp about current accommodation options.</p>`; return; }
+  grid.innerHTML = stays.map((s, i) => `
+    <button class="tour reveal" data-stay="${i}">
+      <img src="${esc(s.cover)}" alt="" loading="lazy">
+      <div class="tour__body">
+        ${s.tag ? `<span class="tour__tag">${esc(s.tag)}</span>` : ""}
+        <h3>${esc(s.title)}</h3>
+        <p>${esc(s.short)}</p>
+        <div class="tour__meta">${s.guests ? `<span>◎ ${esc(s.guests)}</span>` : ""}${s.price ? `<span>${esc(s.price)}</span>` : ""}</div>
+        <span class="tour__more">View details</span>
+      </div>
+    </button>`).join("");
+
+  grid.addEventListener("click", e => {
+    const card = e.target.closest("[data-stay]");
+    if (card) openStay(stays[card.dataset.stay], c.contact?.whatsapp);
+  });
+}
+
+function openStay(s, whatsapp) {
+  const modal = document.getElementById("stayModal");
+  if (!modal) return;
+  const facts = [["Guests", s.guests], ["Amenities", s.amenities], ["Price", s.price]]
+    .filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("");
+  const photos = (s.photos || []).filter(Boolean);
+  document.getElementById("stayModalBody").innerHTML = `
+    <img class="modal__hero" src="${esc(s.cover)}" alt="">
+    <div class="modal__content">
+      ${s.tag ? `<p class="eyebrow">${esc(s.tag)}</p>` : ""}
+      <h2>${esc(s.title)}</h2>
+      ${s.intro ? `<p>${esc(s.intro)}</p>` : ""}
+      ${facts ? `<dl class="modal__facts">${facts}</dl>` : ""}
+      ${s.note ? `<p class="muted"><em>${esc(s.note)}</em></p>` : ""}
+      ${photos.length ? `<div class="modal__thumbs">${photos.map(p => `<img src="${esc(p)}" alt="" loading="lazy">`).join("")}</div>` : ""}
+      ${whatsapp ? `<a href="${waLink(whatsapp, `Hi Veyru Keyolhu! I'm interested in staying at the ${s.title}.`)}" target="_blank" rel="noopener" class="btn btn--full">Ask via WhatsApp</a>` : ""}
+    </div>`;
+  modal.showModal();
+  modal.scrollTop = 0;
+}
+
 /* ---------- Gallery + lightbox ---------- */
 const GALLERY_PREVIEW = 6;
 function renderGallery(c) {
@@ -197,6 +242,7 @@ loadContent().then(c => {
   if (c) {
     applyText(c);
     renderTours(c);
+    renderStays(c);
     renderGallery(c);
     if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
   }
