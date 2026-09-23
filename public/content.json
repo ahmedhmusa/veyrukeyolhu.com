@@ -1,0 +1,151 @@
+{
+  "home": {
+    "eyebrow": "Maldives · Indian Ocean",
+    "title": "Fish the Maldives",
+    "titleEm": "like a local.",
+    "lead": "Elite sports fishing charters & private tours. From heart-pounding GT popping to traditional Maldivian handlining, experience the Indian Ocean like never before.",
+    "toursEyebrow": "Fishing experiences",
+    "toursTitle": "Pick your kind of adventure",
+    "toursLead": "Every trip is private and tailored to your group — whether you are chasing a record GT or a relaxed catch-and-cook dinner under the stars.",
+    "galleryEyebrow": "Gallery",
+    "galleryTitle": "Straight from the boat"
+  },
+  "about": {
+    "eyebrow": "About us",
+    "title": "Local captains.",
+    "titleEm": "Honest fishing.",
+    "image": "photos/img_3833.jpg",
+    "lead": "Veyru Keyolhu is a small, locally run fishing charter in the Maldives.",
+    "body": "Our crew grew up on these reefs, learning the currents, tides and fishing spots the way Maldivians have for generations. Today we share that with visitors — from first-timers trying a handline under the stars to experienced anglers chasing a Giant Trevally.\n\nEvery trip is private, so we can go at your pace and fish the way you want. All gear is included, safety equipment is on every boat, and sport species like GT are always released."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "title": "Let’s go",
+    "titleEm": "fishing.",
+    "lead": "Message us with your preferred date, trip and group size — we usually reply within a few hours.",
+    "whatsapp": "9607925729",
+    "instagram": "veyrukeyolhu",
+    "email": ""
+  },
+  "tours": [
+    {
+      "id": "night",
+      "title": "Traditional Maldivian Night Fishing",
+      "tag": "Family friendly",
+      "cover": "photos/night-fishing.jpg",
+      "short": "Handlines, starlight and a catch-and-cook dinner — fishing the way Maldivians have for centuries.",
+      "intro": "Experience fishing the way Maldivians have for centuries. We use the simplest, most effective method: a handline and a piece of bait.",
+      "thrill": "Feeling the nibble directly on your fingers while the boat drifts under a starlit sky. It is peaceful, rhythmic, and highly productive.",
+      "targets": "Red Snapper, Jobfish, Sea Bass, Jackfish",
+      "equipment": "Traditional handlines (no rods/reels)",
+      "bestFor": "Families, couples, and anyone who wants a “Catch & Cook” dinner",
+      "duration": "Approx. 3 hours",
+      "time": "Sunset to evening",
+      "level": "Beginner",
+      "photos": [
+        "photos/img_0641.jpg",
+        "photos/night-1.jpg",
+        "photos/captain-catch.jpg"
+      ],
+      "note": ""
+    },
+    {
+      "id": "troll",
+      "title": "Big Game Trolling",
+      "tag": "Blue water",
+      "cover": "photos/tuna-catch.jpg",
+      "short": "Lines out behind the boat in open ocean, waiting for the reel to scream.",
+      "intro": "Head beyond the atoll into deep blue water where pelagic predators hunt. We run a spread of lures behind the boat while cruising the edges and FADs where big fish gather.",
+      "thrill": "The sudden scream of the reel as a tuna, wahoo or sailfish hits — then the fight to bring it alongside.",
+      "targets": "Yellowfin Tuna, Skipjack, Wahoo, Mahi-Mahi, Sailfish, Marlin",
+      "equipment": "Heavy trolling rods & reels, skirted lures",
+      "bestFor": "Groups and anglers wanting big fish with no casting skill needed",
+      "duration": "Half day or full day",
+      "time": "Early morning",
+      "level": "All levels",
+      "photos": [
+        "photos/tuna-catch.jpg",
+        "photos/jigging.jpg",
+        "photos/reef-casting.jpg"
+      ],
+      "note": ""
+    },
+    {
+      "id": "pop",
+      "title": "Top-Water Popping & Casting",
+      "tag": "Adrenaline",
+      "cover": "photos/img_0797.jpg",
+      "short": "Cast poppers over the reef edge and watch a Giant Trevally explode on the surface.",
+      "intro": "The Maldives is one of the world's best destinations for GT popping. We cast large surface lures along channel mouths and reef drop-offs where Giant Trevally patrol.",
+      "thrill": "Watching a GT charge your popper and smash it on the surface — the most visual strike in sport fishing.",
+      "targets": "Giant Trevally (GT), Bluefin Trevally, Grouper, Bohar Snapper",
+      "equipment": "Heavy spinning rods, PE 6–8 braid, poppers & stickbaits",
+      "bestFor": "Experienced anglers and thrill-seekers ready for a workout",
+      "duration": "Half day or full day",
+      "time": "Morning or afternoon tide",
+      "level": "Intermediate – Advanced",
+      "photos": [
+        "photos/img_0238.jpg",
+        "photos/lures.jpg",
+        "photos/img_0797.jpg"
+      ],
+      "note": "GT are catch-and-release to protect the fishery."
+    },
+    {
+      "id": "jig",
+      "title": "Vertical Jigging (Deep Sea)",
+      "tag": "Deep water",
+      "cover": "photos/img_3375.jpg",
+      "short": "Drop metal jigs to 100m+ and work them up through the water column.",
+      "intro": "We position the boat over deep reef slopes and pinnacles (thilas), then drop heavy metal jigs to the bottom. A fast, rhythmic retrieve triggers strikes from powerful deep-water species.",
+      "thrill": "Hooking something unknown in the deep and feeling it pull hard all the way to the surface.",
+      "targets": "Dogtooth Tuna, Amberjack, Grouper, Job Fish, Rainbow Runner",
+      "equipment": "Jigging rods & reels, 100–300g metal jigs",
+      "bestFor": "Anglers wanting a physical challenge and a variety of species",
+      "duration": "Half day or full day",
+      "time": "Morning",
+      "level": "Intermediate",
+      "photos": [
+        "photos/img_0659.jpg",
+        "photos/img_3833.jpg",
+        "photos/jigging.jpg"
+      ],
+      "note": ""
+    },
+    {
+      "id": "reef",
+      "title": "Light Tackle & Reef Casting",
+      "tag": "Relaxed",
+      "cover": "photos/reef-casting.jpg",
+      "short": "Light rods, crystal-clear shallows and non-stop action from colourful reef fish.",
+      "intro": "A relaxed trip around the inner reefs and lagoons with light spinning gear. Cast small lures and soft plastics over coral gardens where there's action on almost every cast.",
+      "thrill": "Constant bites from colourful reef species — and the chance of a surprise bigger fish.",
+      "targets": "Bluefin Trevally, Snapper, Emperor, Grouper, Barracuda",
+      "equipment": "Light spinning rods, small lures & soft plastics",
+      "bestFor": "Beginners, kids, and anyone who wants plenty of fish with little effort",
+      "duration": "Approx. 3 hours",
+      "time": "Morning or afternoon",
+      "level": "Beginner",
+      "photos": [
+        "photos/reef-1.jpg",
+        "photos/reef-casting.jpg",
+        "photos/captain-catch.jpg"
+      ],
+      "note": ""
+    }
+  ],
+  "gallery": [
+    "photos/img_0797.jpg",
+    "photos/img_0659.jpg",
+    "photos/img_0641.jpg",
+    "photos/img_3375.jpg",
+    "photos/img_0238.jpg",
+    "photos/img_3833.jpg",
+    "photos/night-1.jpg",
+    "photos/tuna-catch.jpg",
+    "photos/captain-catch.jpg",
+    "photos/reef-1.jpg",
+    "photos/night-2.jpg",
+    "photos/night-fishing.jpg"
+  ]
+}

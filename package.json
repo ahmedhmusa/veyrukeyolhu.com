@@ -1,0 +1,14 @@
+{
+  "name": "veyrukeyolhu",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev public --kv SITE --port 8788 --compatibility-date=2025-01-01"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  },
+  "allowScripts": {
+    "workerd@1.20260921.1": true,
+    "esbuild@0.28.1": true
+  }
+}
