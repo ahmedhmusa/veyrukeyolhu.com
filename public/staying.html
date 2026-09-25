@@ -45,11 +45,20 @@
   </div>
 </header>
 
-<section class="page-head">
-  <div class="container">
+<section class="hero hero--staying">
+  <!-- Two copies of the clip cross-fade into each other so the loop has no visible jump -->
+  <video class="hero__video is-active" autoplay muted loop playsinline preload="auto"
+         poster="/photos/staying-hero-poster.jpg">
+    <source src="/staying-hero.mp4" type="video/mp4">
+  </video>
+  <video class="hero__video" muted playsinline preload="auto" poster="/photos/staying-hero-poster.jpg" aria-hidden="true">
+    <source src="/staying-hero.mp4" type="video/mp4">
+  </video>
+  <div class="hero__shade"></div>
+  <div class="hero__content container">
     <p class="eyebrow" data-bind="staying.eyebrow">Staying</p>
     <h1 data-bind-title="staying">Rest between<br><em>trips.</em></h1>
-    <p class="muted" data-bind="staying.lead">A little more island time. Simple, comfortable places to stay between days on the water — ask us about current availability.</p>
+    <p class="hero__lead" data-bind="staying.lead">A little more island time. Simple, comfortable places to stay between days on the water — ask us about current availability.</p>
   </div>
 </section>
 

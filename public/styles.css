@@ -192,3 +192,7 @@ p { margin: 0 0 1em; }
   .tour { grid-column: span 6; min-height: 400px; }
   .modal__thumbs { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Staying hero: source video is portrait (drone shot), bias the crop down
+   so the anglers stay in frame instead of showing mostly open water/sky. */
+.hero--staying .hero__video { object-position: 50% 82%; }
