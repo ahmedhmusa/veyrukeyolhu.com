@@ -196,3 +196,6 @@ p { margin: 0 0 1em; }
 /* Staying hero: source video is portrait (drone shot), bias the crop down
    so the anglers stay in frame instead of showing mostly open water/sky. */
 .hero--staying .hero__video { object-position: 50% 82%; }
+
+/* Staying hero: photo mode (alternative to the video, chosen in /admin) */
+.hero__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }

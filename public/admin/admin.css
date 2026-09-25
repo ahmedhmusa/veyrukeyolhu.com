@@ -100,3 +100,9 @@ img { display: block; max-width: 100%; }
   .bar__actions { gap: .8rem; font-size: .82rem; }
   .img-field img { width: 100%; }
 }
+
+/* Hero media type toggle (Staying tab) */
+.muted { color: var(--muted); font-size: .92rem; margin: .15rem 0 1rem; }
+.radio-group { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+.radio { display: flex; align-items: center; gap: .4rem; font-weight: 500; font-size: .95rem; cursor: pointer; }
+.radio input { width: auto; padding: 0; border: 0; background: none; accent-color: var(--ink); }

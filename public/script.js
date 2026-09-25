@@ -3,6 +3,9 @@
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const get = (obj, path) => path.split(".").reduce((o, k) => o?.[k], obj);
+// Content stores site-relative paths like "photos/x.jpg"; make sure they resolve
+// from the site root regardless of which page they're used on.
+const abs = u => (!u || /^(https?:|\/|data:|blob:)/.test(u) ? u : "/" + u);
 
 async function loadContent() {
   for (const url of ["/api/content", "content.json"]) {
@@ -95,6 +98,30 @@ function openTour(t, whatsapp) {
 }
 
 /* ---------- Staying ---------- */
+// The Staying hero can show either a looping video or a plain photo (set in
+// /admin). Both elements always exist in the HTML; this just toggles which
+// one is visible and points it at the current content.
+function applyStayingHero(c) {
+  const hero = document.getElementById("stayingHero");
+  if (!hero) return;
+  const s = c.staying || {};
+  const useImage = s.heroType === "image" && !!s.heroImage;
+
+  hero.querySelectorAll(".hero__video").forEach(v => {
+    v.hidden = useImage;
+    if (useImage) { v.pause(); return; }
+    if (s.heroVideo) v.src = abs(s.heroVideo);
+    if (s.heroPoster) v.poster = abs(s.heroPoster);
+  });
+
+  const img = hero.querySelector(".hero__image");
+  if (img) {
+    img.hidden = !useImage;
+    if (useImage) img.src = abs(s.heroImage);
+  }
+}
+
+
 function renderStays(c) {
   const grid = document.getElementById("staysGrid");
   if (!grid) return;
@@ -241,6 +268,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 loadContent().then(c => {
   if (c) {
     applyText(c);
+    applyStayingHero(c);
     renderTours(c);
     renderStays(c);
     renderGallery(c);

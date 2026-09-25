@@ -22,7 +22,11 @@
     "eyebrow": "Staying",
     "title": "Rest between",
     "titleEm": "trips.",
-    "lead": "A little more island time. Simple, comfortable places to stay between days on the water — ask us about current availability."
+    "lead": "A little more island time. Simple, comfortable places to stay between days on the water — ask us about current availability.",
+    "heroType": "video",
+    "heroVideo": "staying-hero.mp4",
+    "heroPoster": "photos/staying-hero-poster.jpg",
+    "heroImage": ""
   },
   "contact": {
     "eyebrow": "Contact",

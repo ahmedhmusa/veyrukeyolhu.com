@@ -146,6 +146,30 @@ function imageFieldHTML(path, label) {
     </div></div>`;
 }
 
+function videoFieldHTML(path, label) {
+  const v = getPath(path);
+  return `<div class="field"><span>${label}</span>
+    <div class="img-field">
+      ${v ? `<video src="${esc(imgSrc(v))}" muted playsinline controls style="max-width:260px;border-radius:8px"></video>` : ""}
+      <label class="btn btn--light btn--sm">${v ? "Replace video" : "Upload video"}
+        <input type="file" accept="video/mp4" hidden data-upload-video="${path}">
+      </label>
+      <small>MP4 only (H.264), up to 40 MB. Convert other formats before uploading.</small>
+    </div></div>`;
+}
+
+function heroMediaHTML() {
+  const type = getPath("staying.heroType") || "video";
+  const radio = (val, label) => `<label class="radio">
+    <input type="radio" name="heroType" value="${val}" data-hero-type ${type === val ? "checked" : ""}> ${label}
+  </label>`;
+  return `
+    <div class="field"><span>Type</span>
+      <div class="radio-group">${radio("video", "Video")}${radio("image", "Photo")}</div>
+    </div>
+    ${type === "image" ? imageFieldHTML("staying.heroImage", "Hero photo") : videoFieldHTML("staying.heroVideo", "Hero video")}`;
+}
+
 function imagesFieldHTML(path, label) {
   const list = getPath(path) || [];
   return `<div class="field"><span>${label}</span>
@@ -195,6 +219,7 @@ function render() {
     content.stays ??= [];
     panel.innerHTML = `
       <div class="panel__head"><div><h2>Staying</h2><p>The page text below, and the rooms/stays listed on it.</p></div></div>
+      <section class="card"><h3>Hero media</h3><p class="muted">Shown full-width at the top of the Staying page.</p>${heroMediaHTML()}</section>
       <section class="card"><h3>Page text</h3>${fieldsHTML("staying", STAYING_PAGE_FIELDS)}</section>
       <div class="panel__head"><div><h3>Rooms &amp; stays</h3><p>Tap one to edit it. Use the arrows to change the order on the site.</p></div>
         <button class="btn btn--light btn--sm" id="addStay">+ Add stay</button></div>
@@ -291,6 +316,27 @@ async function handleUpload(input, multi) {
   render();
 }
 
+// Videos aren't run through the image canvas pipeline — uploaded as-is.
+async function handleVideoUpload(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const path = input.dataset.uploadVideo;
+  toast("Uploading video…");
+  try {
+    if (file.type !== "video/mp4") throw new Error("Please choose an MP4 video file.");
+    const r = await fetch("/api/upload", { method: "POST", headers: { "Content-Type": "video/mp4" }, body: file });
+    if (r.status === 401) { showLogin(); throw new Error("Session expired — please sign in again."); }
+    const data = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(data.error || "Upload failed");
+    setPath(path, data.url);
+    markDirty();
+    toast("Video uploaded — remember to save");
+  } catch (e) {
+    toast(e.message, true);
+  }
+  render();
+}
+
 /* ---------- Events ---------- */
 $("#panel").addEventListener("input", e => {
   const p = e.target.dataset.path;
@@ -304,6 +350,12 @@ $("#panel").addEventListener("input", e => {
 $("#panel").addEventListener("change", e => {
   if (e.target.dataset.uploadSingle) handleUpload(e.target, false);
   if (e.target.dataset.uploadMulti) handleUpload(e.target, true);
+  if (e.target.dataset.uploadVideo) handleVideoUpload(e.target);
+  if (e.target.dataset.heroType !== undefined) {
+    setPath("staying.heroType", e.target.value);
+    markDirty();
+    render();
+  }
 });
 
 $("#panel").addEventListener("click", e => {
@@ -413,6 +465,10 @@ async function showEditor() {
     content.stays ??= [];
     content.gallery ??= [];
     for (const k of ["home", "about", "staying", "contact"]) content[k] ??= {};
+    content.staying.heroType ??= "video";
+    content.staying.heroVideo ??= "";
+    content.staying.heroPoster ??= "";
+    content.staying.heroImage ??= "";
   }
   $("#loginView").hidden = true;
   $("#editorView").hidden = false;
